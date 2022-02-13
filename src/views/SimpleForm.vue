@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Create an Event</h1>
-    <form action="">
+    <form >
       <label for="category">Select a Category</label>
       <select v-model="event.category">
         <option
@@ -13,28 +13,14 @@
         />
       </select>
       <h3>Name & Describe your event</h3>
-      <label>Title</label>
-      <input
-        type="text"
-        v-model="event.title"
-        placeholder="Title"
-        class="field"
-      />
-      <label>Description</label>
-      <input
-        type="text"
-        v-model="event.description"
-        placeholder="Description"
-        class="field"
-      />
+      <BaseInput v-model="event.title" label="Title" type="text" />
+      <BaseInput v-model="event.description" label="Description" type="text" />
+
       <h3>Where is your event?</h3>
+
       <label>Location</label>
-      <input
-        type="text"
-        v-model="event.location"
-        placeholder="Location"
-        class="field"
-      />
+      <BaseInput v-model="event.location" label="Location" type="text" />
+
       <h3>Are pets allowed?</h3>
       <div>
         <input type="radio" v-model="event.pets" :value="1" name="pets" />
@@ -52,10 +38,15 @@
       </div>
       <button type="submit" class="button -fill-gradient">Submit</button>
     </form>
+    <pre>{{ event }}</pre>
   </div>
 </template>
 <script>
+import BaseInput from "../components/BaseInput.vue";
 export default {
+  components: {
+    BaseInput,
+  },
   data() {
     return {
       categories: [
@@ -68,6 +59,7 @@ export default {
         "community",
       ],
       event: {
+        title:"",
         category: "",
         description: "",
         location: "",
