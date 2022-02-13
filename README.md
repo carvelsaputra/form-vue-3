@@ -1,9 +1,10 @@
 # form-vue-3
 
 ## Todo List : 
-- [ ] v-modelling
-- [ ] bind $attrs
-- [ ] spread into component
+- [X] v-modelling
+- [X] bind $attrs
+- [X] spread into component
+- [X] Register global component
 
 
 
