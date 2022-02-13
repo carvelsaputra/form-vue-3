@@ -1,5 +1,13 @@
 # form-vue-3
 
+## Todo List : 
+- [ ] v-modelling
+- [ ] bind $attrs
+- [ ] spread into component
+
+
+
+
 ## Project setup
 ```
 npm install
