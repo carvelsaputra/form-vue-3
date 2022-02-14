@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Create an Event</h1>
-    <form >
+    <form @submit.prevent="sendForm">
      <BaseSelect label="Select a Category " :options="categories" v-model="event.category"/>
       <h3>Name & Describe your event</h3>
       <BaseInput v-model="event.title" label="Title" type="text" />
@@ -31,6 +31,7 @@
   </div>
 </template>
 <script>
+import axios from "axios"
 import BaseInput from "../components/BaseInput.vue";
 import BaseSelect from "../components/BaseSelect.vue"
 export default {
@@ -70,5 +71,10 @@ export default {
       },
     };
   },
+  methods:{
+    sendForm(){
+      axios.post('https://my-json-server.typicode.com/')
+    }
+  }
 };
 </script>
