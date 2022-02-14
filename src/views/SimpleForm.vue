@@ -73,7 +73,11 @@ export default {
   },
   methods:{
     sendForm(){
-      axios.post('https://my-json-server.typicode.com/')
+      axios.post('https://my-json-server.typicode.com/carvelsaputra/form-vue-3/events',this.event).then(res=>{
+        console.log('response',res);
+      }).catch(err=>{
+        console.log("error",err);
+      })
     }
   }
 };

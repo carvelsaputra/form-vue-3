@@ -1,5 +1,5 @@
 <template>
-     <label :v-text="label ? label : '' "/>
+     <label v-if="label" v-text="label"/>
      <!-- event is to notify the value if any changes -->
       <select :value="modelValue" class="field" v-bind="{...$attrs,onChange:(event) => $emit('update:modelValue',event.target.value) }">
         <option
