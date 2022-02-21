@@ -2,13 +2,27 @@
   <div>
     <h1>Create an Event</h1>
     <form @submit.prevent="sendForm">
-     <BaseSelect label="Select a Category " :options="categories" v-model="event.category"/>
+      <BaseSelect
+        label="Select a Category "
+        :options="categories"
+        v-model="event.category"
+      />
 
       <fieldset>
         <legend>Name & Describe your event</legend>
 
-        <BaseInput v-model="event.title" label="Title" type="text" />
-        <BaseInput v-model="event.description" label="Description" type="text" />
+        <BaseInput
+          v-model="event.title"
+          label="Title"
+          type="text"
+          error="This field is required"
+        />
+        <BaseInput
+          v-model="event.description"
+          label="Description"
+          type="text"
+          error="This field is required"
+        />
       </fieldset>
 
       <fieldset>
@@ -22,7 +36,11 @@
 
         <p>Are Pets allowed?</p>
         <div>
-          <BaseRadioGroup  v-model="event.pets" :options="petOptions" name="pets"/>
+          <BaseRadioGroup
+            v-model="event.pets"
+            :options="petOptions"
+            name="pets"
+          />
         </div>
       </fieldset>
 
@@ -30,10 +48,10 @@
         <legend>Extras</legend>
 
         <div>
-          <BaseCheckbox v-model="event.extras.catering" label="Catering"/>
+          <BaseCheckbox v-model="event.extras.catering" label="Catering" />
         </div>
         <div>
-          <BaseCheckbox  v-model="event.extras.music" label="Live Music"/>
+          <BaseCheckbox v-model="event.extras.music" label="Live Music" />
         </div>
       </fieldset>
       <button type="submit" class="button -fill-gradient">Submit</button>
@@ -42,9 +60,9 @@
   </div>
 </template>
 <script>
-import axios from "axios"
+import axios from "axios";
 import BaseInput from "../components/BaseInput.vue";
-import BaseSelect from "../components/BaseSelect.vue"
+import BaseSelect from "../components/BaseSelect.vue";
 export default {
   components: {
     BaseSelect,
@@ -52,13 +70,15 @@ export default {
   },
   data() {
     return {
-      petOptions:[
+      petOptions: [
         {
-          label:"Yes",value:1
+          label: "Yes",
+          value: 1,
         },
         {
-          label:"No",value:0
-        }
+          label: "No",
+          value: 0,
+        },
       ],
       categories: [
         "sustainability",
@@ -70,7 +90,7 @@ export default {
         "community",
       ],
       event: {
-        title:"",
+        title: "",
         category: "",
         description: "",
         location: "",
@@ -82,27 +102,32 @@ export default {
       },
     };
   },
-  methods:{
-    sendForm(){
-      axios.post('https://my-json-server.typicode.com/carvelsaputra/form-vue-3/events',this.event).then(res=>{
-        console.log('response',res);
-      }).catch(err=>{
-        console.log("error",err);
-      })
-    }
-  }
+  methods: {
+    sendForm() {
+      axios
+        .post(
+          "https://my-json-server.typicode.com/carvelsaputra/form-vue-3/events",
+          this.event
+        )
+        .then((res) => {
+          console.log("response", res);
+        })
+        .catch((err) => {
+          console.log("error", err);
+        });
+    },
+  },
 };
 </script>
-<style >
-  fieldset{
-    border:0;
-    margin:0;
-    padding:0
-  }
-  legend{
-    font-size:28px;
-    font-weight: 700;
-    margin-top:20px
-
-  }
+<style>
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+legend {
+  font-size: 28px;
+  font-weight: 700;
+  margin-top: 20px;
+}
 </style>
