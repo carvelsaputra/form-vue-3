@@ -1,14 +1,21 @@
 <template>
   <div id="app">
-    <LoginForm />
+    <div>
+      <h1>Vue 3 Form</h1>
+      klik button below
+      <br />
+      <router-link to="/login">Go to Login</router-link>
+      <br />
+      <router-link to="/form">Go to Form</router-link>
+    </div>
+    <router-view />
   </div>
 </template>
 
 <script>
-import LoginForm from "@/views/LoginForm";
-
+// import LoginForm from "@/views/LoginForm";
 export default {
-  components: { LoginForm },
+  // components: { LoginForm },
 };
 </script>
 
