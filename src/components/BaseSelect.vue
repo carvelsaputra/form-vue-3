@@ -9,6 +9,9 @@
       ...$attrs,
       onChange: updateValue,
     }"
+    :aria-describedby="error ? `${uuid}-error` : null"
+    :aria-invalid="error ? true : false"
+    :class="{ error }"
   >
     <option
       v-for="option in options"
@@ -18,6 +21,9 @@
       v-text="option"
     />
   </select>
+  <BaseErrorMessage v-if="error" :id="`${uuid}-error`">
+    {{ error }}
+  </BaseErrorMessage>
 </template>
 <script>
 import SetupFormComponent from "../features/SetupFormComponent";
@@ -35,6 +41,10 @@ export default {
     options: {
       type: Array,
       required: true,
+    },
+    error: {
+      type: String,
+      default: "",
     },
   },
   setup(props, context) {
