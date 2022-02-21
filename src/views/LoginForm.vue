@@ -18,7 +18,7 @@ export default {
     function onSubmit() {
       alert("Submitted");
     }
-
+    // validation rules
     const validations = {
       email: (value) => {
         if (!value) return "this field is required !";
@@ -37,7 +37,7 @@ export default {
         return true;
       },
     };
-
+    // useform is used to validate whole form by type the validation once
     useForm({
       validationSchema: validations,
     });
