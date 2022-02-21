@@ -1,30 +1,39 @@
 <template>
-    <label v-text="label" :for="uuid"/>
-    <!-- on input we emit update activity which is the value is model value into event target value -->
-    <input
-      :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)"
-      :placeholder="label"
-      class="field"
-      v-bind="$attrs"
-      :id="uuid"
-      :aria-describedby="error ? `${uuid}-error` : null"
-      :aria-invalid="error ? true : null"
-    />
-    <p 
-      aria-live="assertive"
-      v-if="error" 
-      class="errorMessage" 
-      v-text="error" 
-      :id="`${uuid}-error`"
-    />
-    <!-- if we binding in multiroot, we need to define which one node / tag that we bind the attribute -->
+  <label v-if="label" :for="uuid">
+    {{ label }}
+  </label>
+  <!-- on input we emit update activity which is the value is model value into event target value -->
+  <input
+    class="field"
+    v-bind="{
+      ...$attrs,
+      onInput: updateValue,
+    }"
+    :id="uuid"
+    :value="modelValue"
+    :placeholder="label"
+    :aria-describedby="error ? `${uuid}-error` : null"
+    :aria-invalid="error ? true : false"
+    :class="{ error }"
+  />
+  <!-- if we binding in multiroot, we need to define which one node / tag that we bind the attribute -->
+
+  <BaseErrorMessage v-if="error" :id="`${uuid}-error`">
+    {{ error }}
+  </BaseErrorMessage>
 </template>
+
 <script>
-import UniqueID from "../features/UniqueID"
+import SetupFormComponent from "../features/SetupFormComponent";
+import UniqueID from "../features/UniqueID";
+
 export default {
   props: {
     label: {
+      type: String,
+      default: "",
+    },
+    error: {
       type: String,
       default: "",
     },
@@ -32,16 +41,15 @@ export default {
       type: [String, Number],
       default: "",
     },
-    error:{
-      type:String,
-      default:""
-    }
   },
-  setup(){
-    const uuid = UniqueID().getID()
-    return{
-      uuid
-    }
-  }
+  setup(props, context) {
+    const { updateValue } = SetupFormComponent(props, context);
+    const uuid = UniqueID().getID();
+
+    return {
+      updateValue,
+      uuid,
+    };
+  },
 };
 </script>
