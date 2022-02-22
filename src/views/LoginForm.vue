@@ -1,6 +1,12 @@
 <template>
   <form @submit.prevent="onSubmit">
-    <BaseInput label="email" type="email" v-model="email" :error="emailError" />
+    <BaseInput
+      label="email"
+      type="email"
+      :modelValue="email"
+      @change="handleChange"
+      :error="emailError"
+    />
 
     <BaseInput
       v-model="password"
@@ -38,7 +44,7 @@ export default {
       },
     };
     // useform is used to validate whole form by type the validation once
-    useForm({
+    const { setFieldValue } = useForm({
       validationSchema: validations,
     });
 
@@ -46,12 +52,18 @@ export default {
     const { value: email, errorMessage: emailError } = useField("email");
     const { value: password, errorMessage: passwordError } =
       useField("password");
+
+    const handleChange = (event) => {
+      setFieldValue("email", event.target.value);
+    };
+
     return {
       onSubmit,
       email,
       password,
       emailError,
       passwordError,
+      handleChange,
     };
   },
 };
