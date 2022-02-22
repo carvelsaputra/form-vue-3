@@ -13,7 +13,8 @@
     "lodash": "^4.17.21",
     "vee-validate": "^4.5.8",
     "vue": "^3.0.0",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
