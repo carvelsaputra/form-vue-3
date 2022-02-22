@@ -79,6 +79,7 @@ import axios from "axios";
 import BaseInput from "../components/BaseInput.vue";
 import BaseSelect from "../components/BaseSelect.vue";
 import { useField, useForm } from "vee-validate";
+import { object, boolean, string, number } from "yup";
 export default {
   components: {
     BaseSelect,
@@ -86,41 +87,52 @@ export default {
   },
   setup() {
     // make rules for required, min length and handler if our form dont have any validation
-    const required = (value) => {
-      const requiredMessage = "This field is required";
-      if (value === undefined || value === null) return requiredMessage;
-      if (!String(value).length) return requiredMessage;
+    // const required = (value) => {
+    //   const requiredMessage = "This field is required";
+    //   if (value === undefined || value === null) return requiredMessage;
+    //   if (!String(value).length) return requiredMessage;
 
-      return true;
-    };
+    //   return true;
+    // };
 
-    const minLength = (number, value) => {
-      if (String(value).length < number)
-        return `Please type at least more than ${number} characters`;
-      return true;
-    };
+    // const minLength = (number, value) => {
+    //   if (String(value).length < number)
+    //     return `Please type at least more than ${number} characters`;
+    //   return true;
+    // };
 
-    const anything = () => {
-      return true;
-    };
+    // const anything = () => {
+    //   return true;
+    // };
 
     // init our validation schema and define every single form component with the rules
-    const validationSchema = {
-      category: required,
-      title: (value) => {
-        const req = required(value);
-        if (req !== true) return req;
+    // const validationSchema = {
+    //   category: required,
+    //   title: (value) => {
+    //     const req = required(value);
+    //     if (req !== true) return req;
 
-        const min = minLength(3, value);
-        if (min !== true) return min;
-        return true;
-      },
-      description: required,
-      location: undefined,
-      pets: anything,
-      catering: anything,
-      music: anything,
-    };
+    //     const min = minLength(3, value);
+    //     if (min !== true) return min;
+    //     return true;
+    //   },
+    //   description: required,
+    //   location: undefined,
+    //   pets: anything,
+    //   catering: anything,
+    //   music: anything,
+    // };
+
+    const validationSchema = object({
+      category: string().required(),
+      title: string().required("A Cool title is required !").min(3),
+      description: string().required(),
+      location: string(),
+      pets: number(),
+      catering: boolean(),
+      music: boolean(),
+    });
+
     // useForm composition function  have handleSubmit and errors
     const { handleSubmit, errors } = useForm({
       validationSchema,
