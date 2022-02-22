@@ -85,6 +85,7 @@ export default {
     BaseInput,
   },
   setup() {
+    // make rules for required, min length and handler if our form dont have any validation
     const required = (value) => {
       const requiredMessage = "This field is required";
       if (value === undefined || value === null) return requiredMessage;
@@ -92,15 +93,18 @@ export default {
 
       return true;
     };
+
     const minLength = (number, value) => {
       if (String(value).length < number)
         return `Please type at least more than ${number} characters`;
       return true;
     };
+
     const anything = () => {
       return true;
     };
 
+    // init our validation schema and define every single form component with the rules
     const validationSchema = {
       category: required,
       title: (value) => {
@@ -117,7 +121,7 @@ export default {
       catering: anything,
       music: anything,
     };
-
+    // useForm composition function  have handleSubmit and errors
     const { handleSubmit, errors } = useForm({
       validationSchema,
       initialValues: {
@@ -126,11 +130,11 @@ export default {
         music: false,
       },
     });
-
+    // handleSubmit will executed if not detected any errors on validation
     const submit = handleSubmit((values) => {
       console.log("submit", values);
     });
-
+    // useField is used to validate every single fields
     const { value: category } = useField("category");
     const { value: title } = useField("title");
     const { value: description } = useField("description");
