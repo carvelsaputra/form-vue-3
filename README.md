@@ -5,10 +5,10 @@
 - [X] bind $attrs
 - [X] spread into component
 - [X] Register global component
-- Validate fields and forms
-- Handle errors
-- Key API Concepts
-- YUP
+- [X] Validate fields and forms
+- [X] Handle errors
+- [X] Key API Concepts
+- [X] YUP
 
 
 
